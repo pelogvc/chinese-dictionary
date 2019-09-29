@@ -1,0 +1,224 @@
+#chrome_extension_chinese_dictionary {
+    position:fixed;
+    width:300px;
+    height:300px;
+    top:10px;
+    right:10px;
+    background: #eff0f2;
+    z-index:999999;
+    display:none;
+    color:#333;
+    font-size:15px;
+    border:1px solid #00af35;
+    overflow:hidden;
+    font-family: Helvetica,"Malgun Gothic","Apple SD Gothic Neo",AppleGothic,Dotum,Arial,Tahoma;
+}
+#chrome_extension_chinese_dictionary.open {
+    display:block;
+}
+#chrome_extension_chinese_dictionary .title {
+    background:#00c73c;
+    height:30px;
+}
+#chrome_extension_chinese_dictionary .title>h1 {
+    font-size: 15px;
+    line-height: 30px;
+    /* padding: 5px; */
+    /* box-sizing: borer-box; */
+    padding: 0;
+    padding-left: 5px;
+    margin: 0;
+    color: white;
+    letter-spacing: -1px;
+    display: inline-block;
+}
+#chrome_extension_chinese_dictionary .title>h1>span {
+    font-size: 12px;
+    vertical-align: top;
+}
+
+#chrome_extension_chinese_dictionary .content {
+    height: 270px;
+    padding:5px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+#chrome_extension_chinese_dictionary .content ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+#chrome_extension_chinese_dictionary .content ul li {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+#chrome_extension_chinese_dictionary .content ul.words {
+    padding:0 5px;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li {
+    padding-bottom: 5px;
+    padding-top: 10px;
+    border-bottom: 1px solid  #ddd;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li:first-child {
+    padding-top: 0;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li:last-child {
+    border-bottom: 0px;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: "Microsoft Yahei, simsun, Arial, NanumGothic, Dotum, sans-serif";
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>p>a {
+    text-decoration: none;
+    color:#333;
+    font-family: "Microsoft Yahei, simsun, Arial, NanumGothic, Dotum, sans-serif";
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>p>strong {
+    font-family: "Microsoft Yahei, simsun, Arial, NanumGothic, Dotum, sans-serif";
+    color:#333;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>span {
+    vertical-align: middle;
+    font-size:13px;
+    margin-left:5px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li.source {
+    margin:0;
+    font-size:12px;
+    color:#999;
+}
+
+/* 예문 */
+#chrome_extension_chinese_dictionary .content ul.words>li.example {
+
+}
+#chrome_extension_chinese_dictionary .content ul.words>li.example>span {
+    display:block;
+}
+/*
+#chrome_extension_chinese_dictionary .content ul.words>li>span.example {
+    display:block;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>span.examplePinyin {
+    display:block;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>span.exampleFanyi {
+    display:block;
+}
+*/
+
+#chrome_extension_chinese_dictionary .content ul.means>li {
+    margin-top:3px;
+    font-size:13px;
+    width: 270px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li>span{
+    vertical-align: top;
+    line-height: 16px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li>span.parts {
+    height: 16px;
+    margin: 0 0 0 1px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    padding: 0 5px;
+    font-size: 12px;
+    color: #999;
+    box-sizing: content-box;
+    vertical-align: top;
+    margin:0 5px;
+    letter-spacing: -1px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li>span.mean {
+    font-size:15px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li>span.destEntry {
+    font-size:15px;
+}
+#chrome_extension_chinese_dictionary .content ul.means>li>span.destEntry>span.pinyin {
+    font-size:12px;
+}
+
+#chrome_extension_chinese_tab {
+    width: 300px;
+}
+#chrome_extension_chinese_tab>.search {
+    margin:10px 0;
+    height:25px;
+    position: relative;
+}
+#chrome_extension_chinese_tab>.search>input {
+    outline:none;
+}
+#chrome_extension_chinese_tab>.search>input[type="text"] {
+    width: 185px;
+    box-sizing: border-box;
+    height:25px;
+    padding:5px 7px;
+    float:left;
+    border:1px solid #ddd;
+}
+#chrome_extension_chinese_tab>.search>input[type="submit"] {
+    background-color:#d44645;
+    border:0;
+    color:white;
+    height:25px;
+    float:left;
+    width:50px;
+    cursor:pointer;
+    font-family: "Microsoft Yahei, simsun, Arial, NanumGothic, Dotum, sans-serif";
+    font-size: 13px;
+    letter-spacing: -1px;
+    margin-left:5px;
+}
+#chrome_extension_chinese_tab>.search>ul {
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
+#chrome_extension_chinese_tab>.search>ul>li {
+    padding:0;
+    margin:0;
+}
+#chrome_extension_chinese_tab>.search>ul>li>a {
+    display:block;
+    float:right;
+    width:50px;
+    height:25px;
+    line-height:25px;
+    text-decoration: none;
+    color:#888;
+    box-sizing:border-box;
+    text-align: center;
+}
+#chrome_extension_chinese_tab>.search>ul>li>a::before {
+    content: " ";
+    width:1px;
+    height:25px;
+    display:block;
+    background-color:#ddd;
+    float:left;
+    overflow: hidden;
+    margin-right:4px;
+}
+#chrome_extension_chinese_tab>#chrome_extension_chinese_dictionary {
+    position: relative;
+    top:0;
+    right:0;
+    border:0;
+    background:transparent;
+    border-top:1px solid #ededed;
+    margin-top:5px;
+    padding-top:5px;
+}
+#chrome_extension_chinese_tab>#chrome_extension_chinese_dictionary>.content {
+    overflow-y:hidden;
+}

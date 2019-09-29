@@ -1,0 +1,42 @@
+{
+    "manifest_version": 2,
+    "name": "네이버 중국어사전",
+    "description": "네이버 중국어 사전 크롬 익스텐션 (비공식)",
+    "version": "1.0.0",
+    "homepage_url": "https://github.com/pelogvc/ChineseDictionaryChromeExtension",
+    "browser_action": {
+        "default_icon": "img/128.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [
+            "lib/dexie.js",
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*", 
+        "https://*/*",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "all_frames": true,
+            "js": [ 
+                "main.js"
+            ],
+            "css" : [
+                "main.css"
+            ],
+            "matches": [ 
+                "http://*/*", 
+                "https://*/*"
+            ]
+        }
+    ], 
+    "web_accessible_resources": [
+        "main.css"
+    ]
+}
