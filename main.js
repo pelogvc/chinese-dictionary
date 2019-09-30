@@ -1,5 +1,5 @@
 (function() {
-
+    'use strict';
     class Proxy {
 
         static xhr(url) {
@@ -51,6 +51,8 @@
           .onSuccess(function (data) {
             data = JSON.parse(data);
             console.log(data);
+            
+            document.getElementById('chrome_extension_chinese_dictionary').classList.add('open');
           })
           .onFailure(function () {
               return;
@@ -63,7 +65,7 @@
         if ( document.getElementById('chrome_extension_chinese_dictionary') ) return;
         if ( this.isInIframe ) return;
 
-        let element = document.body ? document.body : document.documentElement;
+        const element = document.body ? document.body : document.documentElement;
 
         element.insertAdjacentHTML("beforeend", `
           <div id="chrome_extension_chinese_dictionary">
@@ -81,13 +83,14 @@
       
       // 사전 창 닫기
       clearDic() {
-        if ( $('#chrome_extension_chinese_dictionary').hasClass('open') ) {
-          $('#chrome_extension_chinese_dictionary').removeClass('open');
+        const element = document.getElementById('chrome_extension_chinese_dictionary');
+        if ( element && typeof element.classList.contains('open') !== null ) {
+          element.classList.remove('open');
         }
       }
 
       // 부모페이지 찾아간다
-      run(e) {
+      run = (e) => {
 
         // 다른 스크립트에서도 쓸수있기때문에..
         if ( !e.data || !( e.data.chinese_dictionary_window || e.data.chinese_dictionary_word ) ) {
@@ -95,14 +98,13 @@
         }
     
         // 창 닫으라는 메세지면
-        if ( e.data.chinese_dictionary_window ) {
-            if ( this.isInIframe ) {
-                window.parent.postMessage({ 'chinese_dictionary_window': 1 }, '*');
-            }else{
-              if ( this !== window )
-                this.clearDic();
-            }
-            return;
+        if ( e.data.chinese_dictionary_window === 1 ) {
+          if ( this.isInIframe ) {
+              window.parent.postMessage({ 'chinese_dictionary_window': 1 }, '*');
+          }else{
+            this.clearDic();
+          }
+          return;
         }
     
         e = e.data.chinese_dictionary_word;
