@@ -28,8 +28,9 @@ chrome.extension.onConnect.addListener(function(port) {
       if ( !data || !data.query ) return;
 
       const db = new Dexie('dictionary');
-      db.version(1).stores({
-          recentlyWords: `++id, query, created, title, url, [query+created]`
+      db.version(2).stores({
+          //recentlyWords: `++id, query, created, title, url, [query+created]`
+          recentlyWords: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
       });
 
       var currentDate = new Date();
@@ -38,13 +39,13 @@ chrome.extension.onConnect.addListener(function(port) {
 
       db.table('recentlyWords').where('[query+created]').between([data.query, latestDate], [data.query, currentDate]).toArray().then(function (cursor) {
         if ( !cursor.length ) {
-          db.table('recentlyWords').add(Object.assign(data, {
+          db.table('recentlyWords').add({
+            ...data,
             created: currentDate,
-          }));
+          });
         }
       });
       
-
       // backup
       /*
       db.table('recentlyWords').reverse().offset(0).limit(1).toArray().then(function (array) {

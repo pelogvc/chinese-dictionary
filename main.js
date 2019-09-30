@@ -31,7 +31,7 @@
             return self;
         }
 
-        static put(object) {
+        static insertWord(object) {
             let port = chrome.extension.connect({ name: 'Proxy_recentlyWord' });
             port.postMessage(object);
             return true;
@@ -47,12 +47,21 @@
       parser(word) {
         this.createDic();
 
-        Proxy.xhr('https://zh.dict.naver.com/cndictApi/search/all?sLn=ko&q=' + encodeURIComponent(word) + '&mode=pc&pageNo=1&format=json&hid=153989713248236640')
+        // api before
+        //Proxy.xhr('https://zh.dict.naver.com/cndictApi/search/all?sLn=ko&q=' + encodeURIComponent(word) + '&mode=pc&pageNo=1&format=json&hid=153989713248236640')
+
+        // api v3
+        Proxy.xhr(`https://zh.dict.naver.com/api3/zhko/search?query=${encodeURIComponent(word)}&m=pc&lang=ko&articleAnalyzer=true&hid=156982484709810140`)
           .onSuccess(function (data) {
             data = JSON.parse(data);
             console.log(data);
             
+            // db 저장
+            Proxy.insertWord(data);
+
+            // 창 오픈
             document.getElementById('chrome_extension_chinese_dictionary').classList.add('open');
+
           })
           .onFailure(function () {
               return;
@@ -92,7 +101,6 @@
       // 부모페이지 찾아간다
       run = (e) => {
 
-        // 다른 스크립트에서도 쓸수있기때문에..
         if ( !e.data || !( e.data.chinese_dictionary_window || e.data.chinese_dictionary_word ) ) {
             return;
         }
@@ -107,16 +115,16 @@
           return;
         }
     
-        e = e.data.chinese_dictionary_word;
-        if ( typeof e === 'undefined' ) return;
+        const word = e.data.chinese_dictionary_word;
+        if ( typeof word === 'undefined' ) return;
     
         // 아직도 부모가 있으면
         if ( this.isInIframe ) {
-            window.parent.postMessage({ 'chinese_dictionary_word': e }, '*');
+            window.parent.postMessage({ 'chinese_dictionary_word': word }, '*');
             return;
         }
     
-        this.parser(e);
+        this.parser(word);
       }
     }
 
