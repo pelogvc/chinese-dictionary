@@ -138,13 +138,24 @@
     letter-spacing: -1px;
 }
 #chrome_extension_chinese_dictionary .content ul.means>li>span.mean {
-    font-size:15px;
+    font-size:13px;
 }
 #chrome_extension_chinese_dictionary .content ul.means>li>span.destEntry {
     font-size:15px;
 }
 #chrome_extension_chinese_dictionary .content ul.means>li>span.destEntry>span.pinyin {
     font-size:12px;
+}
+#chrome_extension_chinese_dictionary .content ul.example li {
+    padding-bottom: 5px;
+    padding-top: 10px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    font-size: 13px;
+}
+#chrome_extension_chinese_dictionary .content ul.example span {
+    display:block;
+}
+#chrome_extension_chinese_dictionary .content ul.example .example1Pronun {
 }
 
 #chrome_extension_chinese_tab {

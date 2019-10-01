@@ -5,7 +5,7 @@
     "version": "2.0.0",
     "homepage_url": "https://github.com/pelogvc/chinese-dictionary-chrome-extension-v2",
     "browser_action": {
-        "default_icon": "img/128.png",
+        "default_icon": "assets/128.png",
         "default_popup": "popup.html"
     },
     "background": {

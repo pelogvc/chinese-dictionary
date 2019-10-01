@@ -54,7 +54,6 @@
         Proxy.xhr(`https://zh.dict.naver.com/api3/zhko/search?query=${encodeURIComponent(word)}&m=pc&lang=ko&articleAnalyzer=true&hid=156982484709810140`)
           .onSuccess(function (data) {
             data = JSON.parse(data);
-            console.log(data);
             
             // db 저장
             Proxy.insertWord(data);
@@ -62,6 +61,79 @@
             // 창 오픈
             document.getElementById('chrome_extension_chinese_dictionary').classList.add('open');
 
+            const words  = data.searchResultMap.searchResultListMap.WORD.items;
+            // 그리기
+            let ret = `<ul class='words'>`;
+
+            // 단어
+            for (let word of words) {
+
+              if ( word.destinationLinkKo ) // 링크가 있으면
+                ret += `<li><p><a href="` + word.destinationLinkKo + `" target="_blank">` + word.handleEntry + `</a></p>`;
+              else
+                ret += `<li><p>` + word.handleEntry + `</p>`;
+
+              // pinyin
+              try {
+                ret += `<span>[` + word.searchPhoneticSymbolList[0].phoneticSymbol + `]</span>`;
+              }catch(e) {
+
+              }
+
+              // 뜻
+              ret += `<ul class="means">`;
+
+              let index = 0;
+              for (let meansCollector of word.meansCollector) {
+                for(let mean of meansCollector.means) {
+                  index++;
+                  ret += `
+                    <li>
+                      <span class="index">${index}.</span>
+                  `;
+                  if ( meansCollector.partOfSpeech ) { // parts
+                      ret += `<span class="parts">${meansCollector.partOfSpeech}</span>`;
+                  }
+                  // mean
+                  ret += `
+                      <span class="mean">${mean.value.replace(/(<([^>]+)>)/ig,"")}</span>
+                    </li>
+                  `;
+                }
+              }
+
+              ret += `</ul>`;
+              ret += `</li>`;
+
+            }
+
+            // 예문
+            const examples  = data.searchResultMap.searchResultListMap.EXAMPLE.items;
+            if ( typeof examples !== "undefined" ) {
+              ret += `<ul class="example">`;
+              for (let example of examples) {
+                ret += `
+                  <li>
+                    <span class="example1">${example.expExample1}</span>
+                    <span class="example1Pronun">${example.expExample1Pronun}</span>
+                    <span class="example2">${example.expExample2}</span>
+                  </li>
+                `;
+              }
+              ret += `</ul>`;
+            }
+
+            if ( !examples.length && !words.length ) {
+              ret += `
+                <li class="nothing">
+                  '${data.query}'에 대한 검색 결과가 없습니다.
+                </li>
+              `;
+            }
+
+            ret += `</ul>`;
+
+            document.querySelector('#chrome_extension_chinese_dictionary .content').innerHTML = ret;
           })
           .onFailure(function () {
               return;
@@ -81,7 +153,7 @@
               <div class="title">
                   <h1>
                       네이버 중국어사전
-                      <span>(비공식)<span>
+                      <!--<span>(비공식)<span>-->
                   </h1>
               </div>
               <div class="content">
