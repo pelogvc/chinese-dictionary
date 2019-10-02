@@ -90,6 +90,13 @@
     font-size:13px;
     margin-left:5px;
 }
+#chrome_extension_chinese_dictionary .content ul.words>li>span.audio {
+    cursor:pointer;
+}
+#chrome_extension_chinese_dictionary .content ul.words>li>span.audio svg {
+    width:18px;
+    color:#697994;
+}
 #chrome_extension_chinese_dictionary .content ul.means>li.source {
     margin:0;
     font-size:12px;
