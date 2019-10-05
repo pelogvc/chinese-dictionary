@@ -238,5 +238,5 @@
     padding-top:5px;
 }
 #chrome_extension_chinese_tab>#chrome_extension_chinese_dictionary>.content {
-    overflow-y:hidden;
+    /*overflow-y:hidden;*/
 }

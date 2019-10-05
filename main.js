@@ -251,4 +251,24 @@
 
       dic.run({ 'data' : { 'chinese_dictionary_word' : selected_text }});
     });
+
+    try {
+      const popupButton = document.getElementById('chrome_extension_chinese_tab_submit');
+      const popupInput = document.getElementById('chrome_extension_chinese_tab_input');
+
+      function popupSearch() {
+        if ( !popupInput.value ) {
+          return;
+        }
+
+        dic.run({ 'data' : { 'chinese_dictionary_word' : popupInput.value.trim() }});
+      }
+
+      popupButton.addEventListener('click', popupSearch, false);
+      popupInput.addEventListener('keyup', function(e) {
+        if(e.keyCode == 13) { //enter
+          popupSearch();
+        }
+      })
+    }catch(e){}
 }());
