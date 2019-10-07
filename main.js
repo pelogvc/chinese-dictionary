@@ -257,11 +257,14 @@
       const popupInput = document.getElementById('chrome_extension_chinese_tab_input');
 
       function popupSearch() {
-        if ( !popupInput.value ) {
-          return;
-        }
+        try {
+          const value = popupInput.value.trim();
+          if ( !value ) {
+            return;
+          }
 
-        dic.run({ 'data' : { 'chinese_dictionary_word' : popupInput.value.trim() }});
+          dic.run({ 'data' : { 'chinese_dictionary_word' : value }});
+        }catch(e){}
       }
 
       popupButton.addEventListener('click', popupSearch, false);
