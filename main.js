@@ -224,9 +224,7 @@
         }
         parents.push(parentSelector); 
 
-        return !!parents.find(function(element) {
-          return element.id === 'chrome_extension_chinese_dictionary'
-        })
+        return parents.some(element => element.id === 'chrome_extension_chinese_dictionary');
 
       }
     }
@@ -269,7 +267,7 @@
 
       popupButton.addEventListener('click', popupSearch, false);
       popupInput.addEventListener('keyup', function(e) {
-        if(e.keyCode == 13) { //enter
+        if(e.keyCode === 13) { //enter
           popupSearch();
         }
       })
