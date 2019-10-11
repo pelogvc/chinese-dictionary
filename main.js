@@ -81,8 +81,8 @@
               // 소리
               try {
                 const audio = word.searchPhoneticSymbolList[0].phoneticSymbolPath.toString().split('|');
-                //console.log(audio);
-                if (audio[0]) {
+
+                if (audio[0] && window.location.protocol !== 'chrome-extension:') { // chrome extension 아닌경우에만
                   ret += `
                     <span class="audio" onclick="(function() {
                       const player = new Audio('${audio[0]}');
