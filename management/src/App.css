@@ -1,6 +1,10 @@
-@import '~antd/dist/antd.css';
-@import '~reset-css/reset.css';
+@import "~antd/dist/antd.css";
+@import "~reset-css/reset.css";
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+.App {
+  font: 16px -apple-system, "Noto Sans CJK KR", Noto Sans KR, sans-serif;
+}
 .App-main {
-  margin-left:260px;
+  margin-left: 260px;
 }
