@@ -3,7 +3,7 @@ import { PageState, PageAction } from './types';
 import { SET_PAGE } from './actions';
 
 const initialState : PageState = {
-    id: ''
+    id: 'wordbook'
 }
 
 const reducer = createReducer<PageState, PageAction>(initialState, {
