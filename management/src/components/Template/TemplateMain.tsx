@@ -5,7 +5,7 @@ import './TemplateMain.scss'
 type TemplateMainProps = {
     title: string
     subTitle?: string
-    children: any
+    children: JSX.Element
 }
 function TemplateMain({ title, subTitle, children } : TemplateMainProps) {
     return (
