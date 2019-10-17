@@ -49,7 +49,8 @@ chrome.extension.onConnect.addListener(function(port) {
       // backup
       /*
       db.table('recentlyWords').reverse().offset(0).limit(1).toArray().then(function (array) {
-        let json = JSON.stringify(array);
+        let json = JSON.stringify(JSON.stringify(array));
+        //let json = JSON.stringify(array);
         console.log(json);
       });
       */
