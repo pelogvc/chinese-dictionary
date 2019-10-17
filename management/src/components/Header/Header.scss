@@ -1,0 +1,21 @@
+.Header {
+    position: fixed;
+    height:100%;
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    background-color:#001529;
+    color:rgba(255, 255, 255, 1);
+
+    .Header-logo {
+        padding:16px;
+
+        img {
+            width:26px;
+            vertical-align: middle;
+            margin-right:10px;
+        }
+        span {
+            vertical-align: middle;
+            font-weight: bold;
+        }
+    }
+}
