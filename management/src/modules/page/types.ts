@@ -1,10 +1,10 @@
-import { ActionType } from 'typesafe-actions';
-import * as actions from './actions';
+import { ActionType } from "typesafe-actions";
+import * as actions from "./actions";
 
-export type PageAction = ActionType<typeof actions>
+export type PageAction = ActionType<typeof actions>;
 
 export type Page = {
-    id: string
-}
+  id: string;
+};
 
 export type PageState = Page;

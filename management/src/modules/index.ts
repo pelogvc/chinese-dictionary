@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import page from './page'
+import page from "./page";
+import wordbook from "./wordbook";
 
 const rootReducer = combineReducers({
-    page
-})
+  page,
+  wordbook
+});
 
 export default rootReducer;
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;

@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import TemplateMain from "./components/Template/TemplateMain";
 import Wordbook from "./components/Wordbook/Wordbook";
-import usePage from "./hooks/usePage";
+import usePage from "./hooks/page/usePage";
 
 const App: React.FC = () => {
   const page = usePage();
