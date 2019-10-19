@@ -28,18 +28,18 @@ chrome.extension.onConnect.addListener(function(port) {
       if ( !data || !data.query ) return;
 
       const db = new Dexie('dictionary');
-      db.version(2).stores({
-          //recentlyWords: `++id, query, created, title, url, [query+created]`
-          recentlyWords: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
+      db.version(3).stores({
+          //recentlyWords: `++id, query, created, title, url, [query+created]`,
+          dicWordbook: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
       });
 
       var currentDate = new Date();
       var latestDate = new Date();
       latestDate.setMinutes((currentDate.getMinutes() -5));
 
-      db.table('recentlyWords').where('[query+created]').between([data.query, latestDate], [data.query, currentDate]).toArray().then(function (cursor) {
+      db.table('dicWordbook').where('[query+created]').between([data.query, latestDate], [data.query, currentDate]).toArray().then(function (cursor) {
         if ( !cursor.length ) {
-          db.table('recentlyWords').add({
+          db.table('dicWordbook').add({
             ...data,
             created: currentDate,
           });
@@ -48,7 +48,7 @@ chrome.extension.onConnect.addListener(function(port) {
       
       // backup
       /*
-      db.table('recentlyWords').reverse().offset(0).limit(1).toArray().then(function (array) {
+      db.table('dicWordbook').reverse().offset(0).limit(1).toArray().then(function (array) {
         let json = JSON.stringify(JSON.stringify(array));
         //let json = JSON.stringify(array);
         console.log(json);

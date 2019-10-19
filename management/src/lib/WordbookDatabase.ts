@@ -7,11 +7,11 @@ export class WordbookDatabase extends Dexie {
   constructor() {
     super("dictionary");
 
-    this.version(2).stores({
-      recentlyWords: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
+    this.version(3).stores({
+      dicWordbook: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
     });
 
-    this.wordbook = this.table("recentlyWords");
+    this.wordbook = this.table("dicWordbook");
     this.searchByPage.bind(this);
   }
 
