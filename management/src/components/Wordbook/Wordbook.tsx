@@ -5,7 +5,7 @@ import "./Wordbook.scss";
 import useWordbookPage from "../../hooks/wordbook/useWordbookPage";
 import useWordbookSetPage from "../../hooks/wordbook/useWordbookSetPage";
 import useWordbookData from "../../hooks/wordbook/useWordbookData";
-import { MeansEntity, Word, Means, Examples } from "../../modules/wordbook";
+import { Means, Examples } from "../../modules/wordbook";
 import useWordbookCount from "../../hooks/wordbook/useWordbookCount";
 
 function Wordbook() {
@@ -17,11 +17,11 @@ function Wordbook() {
   const wordbookData = useWordbookData();
   const count = useWordbookCount();
 
-  //console.log(wordbookData);
+  // console.log(wordbookData);
 
   useEffect(() => {
     setPage(page);
-  }, []);
+  }, [page, setPage]);
 
   const columns = [
     {
@@ -86,16 +86,15 @@ function Wordbook() {
       dataIndex: "examples",
       key: "examples",
       render: (arr: Examples[]) => {
-        console.log(arr);
         return (
           <ul className="examples">
             {arr.map((example, i) => {
               return (
                 <li key={i}>
                   {i + 1}.
-                  {example.exampleKo && (
+                  {example.exampleZh && (
                     <span className="example1">
-                      {example.exampleKo.replace(/(<([^>]+)>)/gi, "")}
+                      {example.exampleZh.replace(/(<([^>]+)>)/gi, "")}
                     </span>
                   )}
                   {example.examplePinyin && (
@@ -103,9 +102,9 @@ function Wordbook() {
                       [{example.examplePinyin.replace(/(<([^>]+)>)/gi, "")}]
                     </span>
                   )}
-                  {example.exampleZh && (
+                  {example.exampleKo && (
                     <span className="example2">
-                      {example.exampleZh.replace(/(<([^>]+)>)/gi, "")}
+                      {example.exampleKo.replace(/(<([^>]+)>)/gi, "")}
                     </span>
                   )}
                 </li>
@@ -113,28 +112,6 @@ function Wordbook() {
             })}
           </ul>
         );
-        /*
-          <ul className="examples">
-            {arr.map((obj: ItemsEntity2, i: number) => {
-              if (obj.expExample1 && obj.expExample1Pronun && obj.expExample2) {
-                return (
-                  <li key={i}>
-                    {i + 1}.
-                    <span className="example1">
-                      {obj.expExample1.replace(/(<([^>]+)>)/gi, "")}
-                    </span>
-                    <span className="example1Pronun">
-                      [{obj.expExample1Pronun.replace(/(<([^>]+)>)/gi, "")}]
-                    </span>
-                    <span className="example2">
-                      {obj.expExample2.replace(/(<([^>]+)>)/gi, "")}
-                    </span>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          */
       }
     },
     {

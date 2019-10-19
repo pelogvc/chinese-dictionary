@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import WordbookDataBackup from "../assets/WordbookDataBackup.json";
+import WordbookDataBackup from "../assets/wordbookDataBackup.json";
 
 export class WordbookDatabase extends Dexie {
   public wordbook: Dexie.Table<any, any>;
@@ -30,7 +30,7 @@ export class WordbookDatabase extends Dexie {
     return this.wordbook.count();
   }
 
-  async restore() {
+  public async restore() {
     const json = WordbookDataBackup;
     json.map(async (v, i) => {
       delete v.id;
