@@ -16,12 +16,16 @@ export class WordbookDatabase extends Dexie {
   }
 
   public async searchByPage(page: number) {
-    const offset = ((page || 1) - 1) * 20;
-    return await this.wordbook
+    const offset = ((page || 1) - 1) * this.limit;
+    return this.wordbook
       .orderBy("id")
       .reverse()
       .offset(offset)
       .limit(this.limit)
       .toArray();
+  }
+
+  public async count() {
+    return this.wordbook.count();
   }
 }

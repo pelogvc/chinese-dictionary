@@ -2,11 +2,14 @@ import { createAction, createStandardAction } from "typesafe-actions";
 import { Word } from "./types";
 
 export const SET_PAGE = "wordbook/SET_PAGE";
+export const SET_COUNT = "wordbook/SET_COUNT";
 export const SET_WORDS_REQUEST = "wordbook/SET_WORDS_REQUEST";
 export const SET_WORDS_SUCCESS = "wordbook/SET_WORDS_SUCCESS";
 export const SET_WORDS_FAILURE = "wordbook/SET_WORDS_FAILURE";
 
 export const setPage = createStandardAction(SET_PAGE)<number>();
+
+export const setCount = createStandardAction(SET_COUNT)<number>();
 
 export const setWordsRequest = createAction(
   SET_WORDS_REQUEST,

@@ -17,8 +17,9 @@ export type Word = {
 
 export type WordbookState = {
   page: number;
-  words: Word[];
+  words: object;
   done: boolean;
+  count: number;
 };
 
 // https://jvilk.com/MakeTypes/
@@ -35,6 +36,7 @@ export interface Word {
   created: string;
   id: number;
 }
+*/
 export interface SearchResultMap {
   searchResultListMap: SearchResultListMap;
 }
@@ -362,7 +364,7 @@ export interface RECOMMENDENTRY {
   revert?: null;
   orKEquery?: null;
 }
-
+/*
 export interface WordbookState {
   page: number;
   words: Word[];

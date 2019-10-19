@@ -1,10 +1,11 @@
-import { takeLatest, put, call, all, apply } from "redux-saga/effects";
+import { takeLatest, put, call, all } from "redux-saga/effects";
 import {
   SET_PAGE,
   SET_WORDS_REQUEST,
   setWordsRequest,
   SET_WORDS_FAILURE,
-  SET_WORDS_SUCCESS
+  SET_WORDS_SUCCESS,
+  SET_COUNT
 } from "../modules/wordbook";
 import { ActionType } from "typesafe-actions";
 import { setPage } from "../modules/page";
@@ -30,9 +31,19 @@ function* getWords({ payload: page }: ActionType<typeof setWordsRequest>) {
   }
 }
 
+function* getCounts() {
+  try {
+    const response = yield call([db, db.count]);
+    yield put({ type: SET_COUNT, payload: response });
+  } catch (e) {
+    // console.log(e);
+  }
+}
+
 export default function* wordbook() {
   yield all([
     takeLatest(SET_PAGE, callSetWordsRequest),
-    takeLatest(SET_WORDS_REQUEST, getWords)
+    takeLatest(SET_WORDS_REQUEST, getWords),
+    takeLatest(SET_WORDS_REQUEST, getCounts)
   ]);
 }
