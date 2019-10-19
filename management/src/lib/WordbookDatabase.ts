@@ -1,17 +1,18 @@
 import Dexie from "dexie";
+import WordbookDataBackup from "../assets/WordbookDataBackup.json";
 
 export class WordbookDatabase extends Dexie {
   public wordbook: Dexie.Table<any, any>;
   private limit: number = 10;
 
   constructor() {
-    super("dictionary");
+    super("chinese-dictionary");
 
     this.version(3).stores({
-      dicWordbook: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
+      wordbook: `++id, query, created, examples, means, [query+created]`
     });
 
-    this.wordbook = this.table("dicWordbook");
+    this.wordbook = this.table("wordbook");
     this.searchByPage.bind(this);
   }
 
@@ -27,5 +28,13 @@ export class WordbookDatabase extends Dexie {
 
   public async count() {
     return this.wordbook.count();
+  }
+
+  async restore() {
+    const json = WordbookDataBackup;
+    json.map(async (v, i) => {
+      delete v.id;
+      this.wordbook.add(v);
+    });
   }
 }

@@ -31,7 +31,18 @@
     font-size: 14px;
     margin-left: 5px;
   }
+  .parts {
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    background: #f1f3f5;
+    border: 1px solid #ced4da;
+    color: #868e96;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-size: 11px;
+  }
 }
+
 .examples {
   font-size: 13px;
   .example1 {
@@ -46,6 +57,9 @@
   }
 }
 
+td.id-column {
+  font-size: 11px;
+}
 .ant-table-header-column {
   font-size: 12px;
   color: #bbb;

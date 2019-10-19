@@ -27,30 +27,86 @@ chrome.extension.onConnect.addListener(function(port) {
 
       if ( !data || !data.query ) return;
 
-      const db = new Dexie('dictionary');
+      const db = new Dexie('chinese-dictionary');
       db.version(3).stores({
-          //recentlyWords: `++id, query, created, title, url, [query+created]`,
-          dicWordbook: `++id, LAIMLog, collectionRanking, exactMatcheEntryUrl, mayBeKey, mode, query, range, searchResultMap, created, [query+created]`
+        wordbook: `++id, query, created, examples, means, [query+created]`
       });
 
-      var currentDate = new Date();
-      var latestDate = new Date();
+      let currentDate = new Date();
+      let latestDate = new Date();
       latestDate.setMinutes((currentDate.getMinutes() -5));
 
-      db.table('dicWordbook').where('[query+created]').between([data.query, latestDate], [data.query, currentDate]).toArray().then(function (cursor) {
+      let returnData = {
+        query: data.query,
+        created: currentDate,
+        examples: [],
+        means: [],
+      }
+
+      // api v3
+
+      data.searchResultMap.searchResultListMap.EXAMPLE.items.map((value, i) => {
+        returnData.examples.push({
+          langType: value.exampleLangCode,
+          entry: value.expEntry,
+          exampleZh: value.expExample1,
+          examplePinyin: value.expExample1Pronun,
+          exampleKo: value.expExample2,
+          sourceDictnameKO: value.sourceDictnameKO,
+          sourceDictnameOri: value.sourceDictnameOri,
+          sourceDictnameURL: value.sourceDictnameURL,
+        })
+      })
+
+      data.searchResultMap.searchResultListMap.WORD.items.map((value, i) => {
+        let ret = {
+          langType: value.languageCode,
+          entry: value.handleEntry,
+          sourceDictnameKO: value.sourceDictnameKO,
+          sourceDictnameOri: value.sourceDictnameOri,
+          sourceDictnameURL: value.sourceDictnameURL,
+          destinationLink: value.destinationLink,
+          destinationLinkKo: value.destinationLinkKo,
+          meansCollector: [],
+          phoneticSymbol: [],
+        }
+        value.meansCollector.map((v, k) => {
+          let collectorRet = {
+            partOfSpeech: v.partOfSpeech,
+            means: []
+          }
+          v.means.map((mean, j) => {
+            collectorRet.means.push({
+              code: mean.code,
+              exampleOri: mean.exampleOri,
+              value: mean.value,
+            })
+          })
+          ret.meansCollector.push(collectorRet)
+        })
+        value.searchPhoneticSymbolList.map((v, k) => {
+          let symbolRet = {
+            phoneticSymbolType: v.phoneticSymbolType,
+            phoneticSymbol: v.phoneticSymbol,
+            phoneticSymbolPath: v.phoneticSymbolPath
+          }
+          ret.phoneticSymbol.push(symbolRet)
+        })
+        returnData.means.push(ret)
+      });
+
+
+
+      db.table('wordbook').where('[query+created]').between([data.query, latestDate], [data.query, currentDate]).toArray().then(function (cursor) {
         if ( !cursor.length ) {
-          db.table('dicWordbook').add({
-            ...data,
-            created: currentDate,
-          });
+          db.table('wordbook').add(returnData);
         }
       });
       
       // backup
       /*
-      db.table('dicWordbook').reverse().offset(0).limit(1).toArray().then(function (array) {
-        let json = JSON.stringify(JSON.stringify(array));
-        //let json = JSON.stringify(array);
+      db.table('wordbook').reverse().toArray().then(function (array) {
+        let json = JSON.stringify(array);
         console.log(json);
       });
       */

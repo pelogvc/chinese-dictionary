@@ -1,16 +1,11 @@
 import { Pagination, Table } from "antd";
 import React, { useEffect } from "react";
-// import { WordbookDatabase } from '../../lib/wordbook'
+// import { WordbookDatabase } from "../../lib/WordbookDatabase";
 import "./Wordbook.scss";
 import useWordbookPage from "../../hooks/wordbook/useWordbookPage";
 import useWordbookSetPage from "../../hooks/wordbook/useWordbookSetPage";
 import useWordbookData from "../../hooks/wordbook/useWordbookData";
-import {
-  ItemsEntity,
-  MeansCollectorEntity,
-  MeansEntity,
-  ItemsEntity2
-} from "../../modules/wordbook";
+import { MeansEntity, Word, Means, Examples } from "../../modules/wordbook";
 import useWordbookCount from "../../hooks/wordbook/useWordbookCount";
 
 function Wordbook() {
@@ -22,6 +17,8 @@ function Wordbook() {
   const wordbookData = useWordbookData();
   const count = useWordbookCount();
 
+  //console.log(wordbookData);
+
   useEffect(() => {
     setPage(page);
   }, []);
@@ -31,7 +28,8 @@ function Wordbook() {
       title: "번호",
       dataIndex: "id",
       key: "id",
-      width: "5%"
+      width: "5%",
+      className: "id-column"
     },
     {
       title: "검색한 단어",
@@ -45,51 +43,77 @@ function Wordbook() {
       key: "means",
       width: "40%",
       className: "mean-column",
-      render: (arr: any) =>
-        arr.map((obj: ItemsEntity, i: number) => {
+      render: (arr: Means[]) => {
+        return arr.map((v, i) => {
           const pinyin =
-            obj.searchPhoneticSymbolList &&
-            obj.searchPhoneticSymbolList[0] &&
-            obj.searchPhoneticSymbolList[0].phoneticSymbol;
-
+            v.phoneticSymbol &&
+            v.phoneticSymbol[0] &&
+            v.phoneticSymbol[0].phoneticSymbol;
           return (
             <ul className="means" key={i}>
               <li>
                 <div className="handle-entry">
-                  {i + 1}. {obj.handleEntry}
-                  <span className="pinyin">[{pinyin}]</span>
+                  {i + 1}. {v.entry}
+                  {pinyin && <span className="pinyin">[{pinyin}]</span>}
                 </div>
                 <ul className="mean">
-                  {obj.meansCollector &&
-                    obj.meansCollector.map(
-                      (item: MeansCollectorEntity, a: number) => {
-                        return (
-                          item.means &&
-                          item.means.map((mean: MeansEntity, b: number) => {
-                            if (mean.value) {
-                              return (
-                                <li key={b}>
-                                  {b + 1}.{" "}
-                                  {mean.value.replace(/(<([^>]+)>)/gi, "")}
-                                </li>
-                              );
-                            }
-                          })
-                        );
-                      }
-                    )}
+                  {v.meansCollector &&
+                    v.meansCollector.map((item, k) => {
+                      const parts = item.partOfSpeech;
+
+                      return (
+                        item.means &&
+                        item.means.map((mean, j) => {
+                          return (
+                            <li key={j}>
+                              {j + 1}.
+                              {parts && <span className="parts">{parts}</span>}
+                              {mean.value.replace(/(<([^>]+)>)/gi, "")}
+                            </li>
+                          );
+                        })
+                      );
+                    })}
                 </ul>
               </li>
             </ul>
           );
-        })
+        });
+      }
     },
     {
       title: "예문",
-      dataIndex: "meanExamples",
-      key: "meanExamples",
-      render: (arr: any) => {
+      dataIndex: "examples",
+      key: "examples",
+      render: (arr: Examples[]) => {
+        console.log(arr);
         return (
+          <ul className="examples">
+            {arr.map((example, i) => {
+              return (
+                <li key={i}>
+                  {i + 1}.
+                  {example.exampleKo && (
+                    <span className="example1">
+                      {example.exampleKo.replace(/(<([^>]+)>)/gi, "")}
+                    </span>
+                  )}
+                  {example.examplePinyin && (
+                    <span className="example1Pronun">
+                      [{example.examplePinyin.replace(/(<([^>]+)>)/gi, "")}]
+                    </span>
+                  )}
+                  {example.exampleZh && (
+                    <span className="example2">
+                      {example.exampleZh.replace(/(<([^>]+)>)/gi, "")}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        );
+        /*
           <ul className="examples">
             {arr.map((obj: ItemsEntity2, i: number) => {
               if (obj.expExample1 && obj.expExample1Pronun && obj.expExample2) {
@@ -110,7 +134,7 @@ function Wordbook() {
               }
             })}
           </ul>
-        );
+          */
       }
     },
     {

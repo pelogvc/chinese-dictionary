@@ -20,10 +20,8 @@ export const setWordsRequest = createAction(
 
 export const setWordsSuccess = createAction(
   SET_WORDS_SUCCESS,
-  action => (payload: Word) => {
-    return action({
-      ...payload
-    });
+  action => (payload: Word[]) => {
+    return action(payload);
   }
 );
 
