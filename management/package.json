@@ -1,6 +1,6 @@
 {
   "name": "management",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.18",
@@ -22,7 +22,7 @@
     "reset-css": "^5.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typesafe-actions": "^4.4.2",
-    "typescript": "3.6.3"
+    "typescript": "3.9.3"
   },
   "scripts": {
     "start": "react-scripts start",
