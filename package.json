@@ -1,0 +1,61 @@
+{
+  "name": "chinese-dictionary",
+  "version": "3.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pelogvc/chinese-dictionary.git"
+  },
+  "author": {
+    "email": "pelogvc@gmail.com",
+    "name": "liam",
+    "url": "https://github.com/pelogvc"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.16.7",
+    "ant-design-vue": "^1.7.8",
+    "axios": "^0.24.0",
+    "buefy": "^0.9.14",
+    "bulma-fluent": "^0.4.3",
+    "dexie": "^3.2.0",
+    "vue": "^2.6.11"
+  },
+  "description": "네이버 중국어사전 크롬 익스텐션",
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.16.7",
+    "@babel/preset-env": "^7.10.4",
+    "archiver": "^4.0.2",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-vue": "^6.2.2",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "script-ext-html-webpack-plugin": "^2.1.4",
+    "style-loader": "^1.2.1",
+    "vue-loader": "^15.9.3",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-extension-reloader": "^1.1.4"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run pack && npm run remove-evals && npm run zip",
+    "dev": "webpack --mode=development --env.NODE_ENV=development --progress --hide-modules --hot --watch",
+    "lint": "eslint --ext .js,.vue --fix ./src",
+    "pack": "webpack --mode=production --env.NODE_ENV=production --progress --hide-modules",
+    "remove-evals": "node scripts/remove-evals.js",
+    "zip": "node scripts/build-zip.js"
+  }
+}

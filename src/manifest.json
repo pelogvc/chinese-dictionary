@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "네이버 중국어사전",
+  "description": "네이버 중국어 사전 크롬 익스텐션",
+  "version": "3.0.0",
+  "background": {
+    "default_icon": "assets/128.png",
+    "scripts": [
+      "./background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "./popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": ["./contentScripts.js"],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+      "128": "assets/icons/128.png"
+  },
+  "options_ui": {
+    "chrome_style": false,
+    "page": "./options.html"
+  },
+  "permissions": ["http://*/*", "https://*/*", "storage", "tabs", "webRequest"],
+  "web_accessible_resources": [ "search.html" ]
+}

@@ -1,5 +1,5 @@
-# chinese-dictionary-chrome-extension-v2
-중국어 사전(react, typescript, redux-saga)
+# chinese-dictionary
+네이버 중국어 사전 크롬 익스텐션
 ## 네이버 중국어사전
 인터넷 사용중 드래그만으로 검색하고 단어장에 검색한 중국어 단어를 저장하세요.
 ### [검색]
