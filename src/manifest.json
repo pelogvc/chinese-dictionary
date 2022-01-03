@@ -15,6 +15,7 @@
   "content_scripts": [
     {
       "all_frames": true,
+      "css": [ "./assets/css/contentScript.css" ],
       "js": ["./contentScripts.js"],
       "matches": [ "\u003Call_urls>" ],
       "run_at": "document_end"
