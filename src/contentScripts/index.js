@@ -1,5 +1,3 @@
-import './index.scss'
-
 // eslint-disable-next-line func-names
 (function() {
   class Dictionary {
@@ -89,4 +87,11 @@ import './index.scss'
 
     return true;
   });
+
+  chrome.runtime.onMessage.addListener((msg) => {
+    if (msg.name === 'chinese-dictionary-context-search') {
+      dic.run({ 'data': { 'chinese_dictionary_word': msg.selectedText } });
+    }
+  });
+
 }());

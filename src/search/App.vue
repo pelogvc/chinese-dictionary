@@ -2,7 +2,16 @@
   <div
     class="chrome_extension_chinese_dictionary"
   >
-    <div class="content">
+    <div
+      v-if="datas.length <= 0"
+      class="noitem"
+    >
+      검색결과가 없습니다.
+    </div>
+    <div
+      v-if="datas.length > 0"
+      class="content"
+    >
       <ul class="words">
         <li
           v-for="(data, key) in datas"
@@ -48,9 +57,7 @@
               <span
                 v-if="mean.speech"
                 class="parts"
-              >
-                {{ mean.speech }}
-              </span>
+              >{{ mean.speech }}</span>
               <span
                 v-if="mean.value"
                 class="mean"
@@ -76,20 +83,7 @@ export default {
   data() {
     return {
       word: null,
-      datas: [
-        {
-          word: '你好',
-          pinyin: 'nǐhǎo',
-          means: [
-            {
-              value: '안녕하십니까?',
-              speech: null,
-            }
-          ],
-          link: '',
-          audio: '',
-        }
-      ],
+      datas: [],
       audio: null,
     }
   },
@@ -119,6 +113,10 @@ export default {
         created: currentDate,
         examples: [],
         means: [],
+      }
+
+      if (!data.searchResultMap.searchResultListMap) {
+        return;
       }
 
       // eslint-disable-next-line no-restricted-syntax
@@ -266,6 +264,10 @@ export default {
 			}
 		}
 	}
+  .noitem {
+    text-align: center;
+    margin: 20px 0;
+  }
 	.content {
 		height: 270px;
 		padding: 5px;

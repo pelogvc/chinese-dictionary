@@ -1,6 +1,7 @@
 let settings = {
   isEnabled: true,
 }
+let contentTabId = null;
 
 // default settings for development environment
 if (process.env.NODE_ENV === 'development') {
@@ -25,10 +26,11 @@ function saveSettings(updated) {
   })
 }
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, sender) => {
   if (!settings.isEnabled) return
 
   console.log(message, settings)
+  contentTabId = sender.tab.id;
 })
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -36,3 +38,15 @@ chrome.runtime.onInstalled.addListener(() => {
 })
 
 loadSettings()
+
+chrome.contextMenus.create({
+  title: "네이버 중국어사전에서 '%s' 검색",
+  contexts: ["selection"],
+  onclick: (info) => {
+    chrome.tabs.sendMessage(contentTabId, {
+      name: 'chinese-dictionary-context-search',
+      selectedText: info.selectionText,
+    })
+    return true;
+  }
+});
