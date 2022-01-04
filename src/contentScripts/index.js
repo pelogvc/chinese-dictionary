@@ -88,8 +88,12 @@
     return true;
   });
 
+  chrome.runtime.sendMessage({
+    type: 'CHINESE_DICTIONARY_INITIALIZE',
+  });
+
   chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.name === 'chinese-dictionary-context-search') {
+    if (msg.name === 'CHINESE_DICTIONARY_CONTEXTMENU_SEARCH') {
       dic.run({ 'data': { 'chinese_dictionary_word': msg.selectedText } });
     }
   });

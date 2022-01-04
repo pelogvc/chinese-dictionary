@@ -43,8 +43,12 @@ chrome.contextMenus.create({
   title: "네이버 중국어사전에서 '%s' 검색",
   contexts: ["selection"],
   onclick: (info) => {
+    if (contentTabId === null) {
+      console.log('contextmenu search failed. contentTabId is null.');
+      return false;
+    }
     chrome.tabs.sendMessage(contentTabId, {
-      name: 'chinese-dictionary-context-search',
+      name: 'CHINESE_DICTIONARY_CONTEXTMENU_SEARCH',
       selectedText: info.selectionText,
     })
     return true;
