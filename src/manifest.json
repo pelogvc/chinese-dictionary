@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "네이버 중국어사전",
   "description": "네이버 중국어 사전 크롬 익스텐션",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "background": {
     "default_icon": "assets/128.png",
     "scripts": [
