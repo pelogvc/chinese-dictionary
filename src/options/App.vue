@@ -36,7 +36,7 @@
                   <span
                     v-if="item.partOfSpeech"
                     class="parts"
-                  >{ item.partOfSpeech }}</span>
+                  >{{ item.partOfSpeech }}</span>
                   <span
                     v-if="m.value"
                   >
