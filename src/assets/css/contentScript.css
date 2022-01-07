@@ -14,7 +14,10 @@
   font-family: Helvetica, "Malgun Gothic", "Apple SD Gothic Neo", AppleGothic, Dotum, Arial, Tahoma;
 }
 #chrome_extension_chinese_dictionary .content {
-  height: calc(100% - 30px);
+  height: calc(100% - 30px) !important;
+  min-height: calc(100% - 30px) !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 #chrome_extension_chinese_dictionary iframe {
   border: none;
