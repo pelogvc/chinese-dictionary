@@ -29,6 +29,6 @@
     "chrome_style": false,
     "page": "./options.html"
   },
-  "permissions": ["http://*/*", "https://*/*", "storage", "tabs", "webRequest", "contextMenus"],
+  "permissions": ["http://*/*", "https://*/*", "storage", "tabs", "contextMenus"],
   "web_accessible_resources": [ "search.html" ]
 }
