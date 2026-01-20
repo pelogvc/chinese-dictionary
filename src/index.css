@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(0 0% 3.9%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 3.9%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(0 0% 3.9%);
+  --color-primary: hsl(0 0% 9%);
+  --color-primary-foreground: hsl(0 0% 98%);
+  --color-secondary: hsl(0 0% 96.1%);
+  --color-secondary-foreground: hsl(0 0% 9%);
+  --color-muted: hsl(0 0% 96.1%);
+  --color-muted-foreground: hsl(0 0% 45.1%);
+  --color-accent: hsl(0 0% 96.1%);
+  --color-accent-foreground: hsl(0 0% 9%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(0 0% 89.8%);
+  --color-input: hsl(0 0% 89.8%);
+  --color-ring: hsl(0 0% 3.9%);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Duolingo Palette */
+  --color-duo-green: #58CC02;
+  --color-duo-green-dark: #58A700;
+  --color-duo-blue: #1CB0F6;
+  --color-duo-blue-dark: #1899D6;
+  --color-duo-orange: #FF9600;
+  --color-duo-orange-dark: #E58600;
+  --color-duo-red: #FF4B4B;
+  --color-duo-red-dark: #EA2B2B;
+  --color-duo-gray: #E5E5E5;
+  --color-duo-gray-text: #AFAFAF;
+  --color-duo-text: #4B4B4B;
+  --color-duo-bg: #FFFFFF;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .duo-btn-green {
+    @apply bg-duo-green text-white font-extrabold uppercase tracking-wider rounded-xl border-b-4 border-duo-green-dark active:border-b-0 active:translate-y-1 active:mt-1 transition-all hover:bg-[#61E002];
+  }
+  .duo-btn-blue {
+    @apply bg-duo-blue text-white font-extrabold uppercase tracking-wider rounded-xl border-b-4 border-duo-blue-dark active:border-b-0 active:translate-y-1 active:mt-1 transition-all hover:bg-[#2DD0F8];
+  }
+  .duo-btn-red {
+    @apply bg-duo-red text-white font-extrabold uppercase tracking-wider rounded-xl border-b-4 border-duo-red-dark active:border-b-0 active:translate-y-1 active:mt-1 transition-all hover:bg-[#FF6464];
+  }
+  .duo-btn-ghost {
+    @apply bg-transparent text-duo-gray-text font-bold uppercase tracking-wider rounded-xl hover:bg-duo-gray/20 transition-all;
+  }
+  .duo-card {
+    @apply bg-white border-2 border-duo-gray rounded-2xl p-4 shadow-sm;
+  }
+  .duo-input {
+    @apply bg-[#F7F7F7] border-2 border-duo-gray rounded-xl p-3 focus:outline-none focus:border-duo-blue text-duo-text font-bold placeholder-duo-gray-text transition-colors;
+  }
+}

@@ -62,3 +62,7 @@ dist-zip/
 
 .history
 .DS_Store
+
+docs
+AGENTS.md
+CLAUDE.md

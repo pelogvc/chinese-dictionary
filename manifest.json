@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "도토리 중국어사전",
+  "description": "도토리 중국어 사전 크롬 익스텐션",
+  "version": "4.0.0",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "icons": {
+    "16": "src/assets/icons/16.png",
+    "48": "src/assets/icons/48.png",
+    "128": "src/assets/icons/128.png"
+  },
+  "action": {
+    "default_popup": "src/pages/popup/index.html",
+    "default_icon": {
+      "16": "src/assets/icons/16.png",
+      "48": "src/assets/icons/48.png",
+      "128": "src/assets/icons/128.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/pages/options/index.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "src/background/index.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content/index.tsx"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/pages/search/index.html",
+        "assets/*.wasm",
+        "assets/*.worker*.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": ["storage", "contextMenus", "declarativeNetRequest"],
+  "host_permissions": ["https://zh.dict.naver.com/*", "https://learn.dict.naver.com/*", "https://dict-dn.pstatic.net/*"]
+}

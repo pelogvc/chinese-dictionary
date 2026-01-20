@@ -1,6 +1,15 @@
 {
   "name": "chinese-dictionary",
-  "version": "3.0.6",
+  "version": "4.0.0",
+  "description": "도토리 중국어 사전 크롬 익스텐션",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pelogvc/chinese-dictionary.git"
@@ -10,52 +19,35 @@
     "name": "liam",
     "url": "https://github.com/pelogvc"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.16.7",
-    "ant-design-vue": "^1.7.8",
-    "axios": "^0.24.0",
-    "buefy": "^0.9.14",
-    "bulma-fluent": "^0.4.3",
-    "dexie": "^3.2.2",
-    "vue": "^2.6.11"
-  },
-  "description": "네이버 중국어사전 크롬 익스텐션",
-  "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.16.7",
-    "@babel/preset-env": "^7.10.4",
-    "archiver": "^4.0.2",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.3",
-    "css-loader": "^3.6.0",
-    "eslint": "^7.4.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-vue": "^6.2.2",
-    "file-loader": "^6.0.0",
-    "html-webpack-plugin": "^4.3.0",
-    "sass": "^1.26.10",
-    "sass-loader": "^9.0.2",
-    "script-ext-html-webpack-plugin": "^2.1.4",
-    "style-loader": "^1.2.1",
-    "vue-loader": "^15.9.3",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-extension-reloader": "^1.1.4"
-  },
   "license": "MIT",
-  "scripts": {
-    "build": "npm run pack && npm run remove-evals && npm run zip",
-    "dev": "webpack --mode=development --env.NODE_ENV=development --progress --hide-modules --hot --watch",
-    "lint": "eslint --ext .js,.vue --fix ./src",
-    "pack": "webpack --mode=production --env.NODE_ENV=production --progress --hide-modules",
-    "remove-evals": "node scripts/remove-evals.js",
-    "zip": "node scripts/build-zip.js"
+  "dependencies": {
+    "@powersync/drizzle-driver": "^0.7.1",
+    "@powersync/web": "^1.31.0",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.1",
+    "lucide-react": "^0.512.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.28",
+    "@eslint/js": "^9.39.2",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/chrome": "^0.1.33",
+    "@types/node": "^25.0.9",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.53.0",
+    "vite": "^6.4.1"
   }
 }
